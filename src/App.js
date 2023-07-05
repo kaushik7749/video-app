@@ -1,24 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Head from "./components/Head";
+import Body from "./components/Body";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import MainContainer from "./components/MainContainer";
+import WatchPage from "./components/WatchPage";
+
+const appRouter = createBrowserRouter([{
+  path: "/",
+  element: <Body/>,
+
+  //These children will go wherever my Outlet is. and I will create Outlet after Sidebar in Body.js
+
+  children: [
+    {
+      path: "/",
+      element: <MainContainer/>
+    },
+    {
+      path: "watch",
+      element: <WatchPage/>
+    }
+  ]
+}])
+
+//wherever I give my RouterProvider it will render it over there
+//If my app path is "/" my body will render below <Head/>
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store = {store}>
+    <div>
+    <Head/>
+    <RouterProvider router={appRouter} />
+    {/**
+     * 
+     * Head
+     * Body
+     *   Sidebar
+     *   MenuItems
+     *   MainContainer
+     *      ButtonsList
+     *      VideoContainer
+     *    Videocard
+     * 
+     */}
+  </div>
+  </Provider>
   );
 }
 
