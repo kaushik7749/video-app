@@ -12,6 +12,7 @@ const Head = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const searchCache = useSelector((store) => store.search);
+  const dispatch = useDispatch();
 
   //If the searchQuery is present in my searchCache then I should make an api call and update in my cache
   useEffect(() => {
@@ -60,7 +61,7 @@ const Head = () => {
     );
   };
 
-  const dispatch = useDispatch();
+  
 
   //Dispatch an action and let's call toggleMenu inside our dispatch
   const toggleMenuHandler = () => {
